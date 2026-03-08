@@ -5,125 +5,212 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>pinkjujapipi - Official</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
---bg:#FEFCE8; 
---main:#EAB308;
---dark:#854D0E;
---active:#583101; /* สีเข้มสำหรับปุ่มที่ถูกเลือก */
---white:#FFFFFF;
---glow:rgba(234, 179, 8, 0.3);
+:root {
+  --bg: #FEFFF5; /* ครีมสดใสกว่าเดิม */
+  --main: #FBBF24; /* เหลืองสดกว่าทองเดิม */
+  --accent: #FF00A2; /* ชมพูนีออนสำหรับตัดและเน้น "pinkjujapipi" */
+  --dark: #78350F; /* น้ำตาลเข้มเดิม */
+  --darker: #451A03; /* น้ำตาลเข้มกว่าเดิม */
+  --white: rgba(255, 255, 255, 0.9); /* ขาวโปร่งแสงเล็กน้อย */
+  --glass: rgba(255, 255, 255, 0.3); /* เอฟเฟกต์แก้ว */
+  --glow: rgba(251, 191, 36, 0.15); /* แสงเหลืองนุ่มนวล */
+  --accent-glow: rgba(255, 0, 162, 0.15); /* แสงชมพูอ่อนๆ */
+  --transition: 0.3s ease;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Mitr',sans-serif;}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mitr', sans-serif; }
 
-body{
-background:var(--bg);
-display:flex;
-justify-content:center;
-padding-bottom: 80px; /* กันโดนเมนูด้านล่างทับ */
-}
-
-.container{
-max-width:500px;
-width:100%;
-padding:20px 15px 40px;
+body {
+  background: var(--bg);
+  background-image: linear-gradient(135deg, #FEFFF5 0%, #FFFDF0 100%);
+  display: flex; justify-content: center;
+  padding-bottom: 90px; /* กันโดนเมนูด้านล่างทับ เพิ่มเล็กน้อย */
 }
 
-/* ระบบจัดการหน้า (Pages) */
-.page {
-    display: none; /* ซ่อนหน้าไว้ก่อน */
-    animation: fadeIn 0.4s ease;
+.container {
+  max-width: 500px; width: 100%;
+  padding: 30px 15px 50px;
 }
-.page.active {
-    display: block; /* แสดงเฉพาะหน้าที่มี class active */
-}
+
+/* Page management */
+.page { display: none; animation: fadeIn 0.5s ease; }
+.page.active { display: block; }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ส่วนประกอบหลัก */
-.section{
-background:var(--white);
-border-radius:20px;
-padding:25px 20px;
-margin-bottom:20px;
-box-shadow:0 8px 20px rgba(0,0,0,0.05);
-border:2px solid var(--main);
+/* Section design */
+.section {
+  backdrop-filter: blur(10px);
+  background: var(--glass);
+  border-radius: 25px;
+  padding: 30px 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-h1,h2,h3{color:var(--dark); margin-bottom:15px;}
-.center{text-align:center;}
+h1, h2, h3 { color: var(--dark); margin-bottom: 18px; font-weight: 600; }
+h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.center { text-align: center; }
 
-/* Navigation Bar ด้านล่าง */
+/* Navigation Bar */
 .nav-bar {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 450px;
-    background: var(--white);
-    display: flex;
-    justify-content: space-around;
-    padding: 12px;
-    border-radius: 30px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    z-index: 1000;
-    border: 2px solid var(--main);
+  position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+  width: 90%; max-width: 450px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.8);
+  display: flex; justify-content: space-around;
+  padding: 15px;
+  border-radius: 35px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: var(--transition);
 }
 
 .nav-item {
-    text-decoration: none;
-    color: var(--main);
-    font-size: 14px;
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    transition: 0.3s;
-    padding: 8px 15px;
-    border-radius: 20px;
+  text-decoration: none;
+  color: var(--dark);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 10px 20px;
+  border-radius: 25px;
 }
 
 .nav-item.active {
-    background: var(--dark);
-    color: #fff;
+  background: var(--dark);
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(120, 53, 15, 0.3);
 }
 
-/* ปุ่มและองค์ประกอบอื่นๆ */
-.logo{
-width:150px;height:150px;
-border-radius:50%;
-overflow:hidden;
-margin:0 auto 20px;
-box-shadow:0 6px 20px var(--glow);
+/* Logo */
+.logo {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 25px;
+  box-shadow: 0 10px 30px var(--accent-glow);
+  transition: var(--transition);
+  border: 6px solid #fff;
 }
-.logo img{width:100%;height:100%;object-fit:cover;}
+.logo img { width: 100%; height: 100%; object-fit: cover; }
+.logo:hover { transform: scale(1.03) rotate(2deg); }
 
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:20px;}
-.badge{background:#fff;padding:8px 16px;border-radius:25px;box-shadow:0 4px 10px var(--glow);font-size:13px;color:var(--dark);}
+/* Badges */
+.badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 25px; }
+.badge {
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.03);
+  font-size: 13px;
+  color: var(--dark);
+  border: 2px solid var(--main);
+}
+.badge:first-child { border-color: var(--accent); color: var(--accent); }
 
-.btn{display:block;text-align:center;padding:14px;border-radius:25px;text-decoration:none;margin-top:10px;font-weight:500;}
-.btn-outline{background:#fff;border:2px dashed var(--main);color:var(--dark);margin-top:20px;}
-.btn-main{background:var(--main);color:#fff;}
-.btn-sub{background:#FFFBEB;border:1px solid var(--main);color:var(--dark);font-size: 14px;}
+/* Buttons */
+.btn {
+  display: block; text-align: center;
+  padding: 15px; border-radius: 25px;
+  text-decoration: none; margin-top: 12px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.btn:hover { transform: translateY(-3px); }
 
-.step{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.step-num{background:var(--main);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;}
-.price-row{display:flex;justify-content:space-between;margin-bottom:10px;background:#fffcfd;padding:10px 15px;border-radius:15px;}
-.price-tag{background:var(--main);color:#fff;padding:3px 12px;border-radius:20px;font-size:14px;}
+.btn-main {
+  background: linear-gradient(135deg, var(--main), #FFB14C);
+  color: var(--darker);
+  box-shadow: 0 6px 15px rgba(251, 191, 36, 0.3);
+}
+.btn-outline {
+  background: #fff;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  margin-top: 25px;
+  box-shadow: 0 5px 12px var(--accent-glow);
+}
+.btn-sub {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--main);
+  color: var(--dark);
+  font-size: 14px;
+}
+.btn-sub:hover { background: #fff; }
 
-.footer{text-align:center;margin-top:30px;}
-.socials{display:flex;gap:8px;justify-content:center;margin-top:15px;}
-.socials a{flex:1;max-width:100px;text-align:center;padding:8px;border-radius:25px;background:#fff;text-decoration:none;color:var(--dark);font-size:13px;border:1px solid #fef3c7;}
-.small{font-size:12px;opacity:.7;margin-top:10px;}
+/* Steps */
+.step { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.step-num {
+  background: var(--main);
+  color: var(--darker);
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 10px var(--glow);
+}
+
+/* Prices & Rules */
+.price-row {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+  background: #fff;
+  padding: 12px 20px;
+  border-radius: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+.price-tag {
+  background: var(--main);
+  color: var(--darker);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Footer */
+.footer { text-align: center; margin-top: 40px; }
+.socials { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+.socials a {
+  flex: 1; max-width: 110px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  color: var(--dark);
+  font-size: 13px;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.socials a:hover {
+  background: var(--main);
+  color: var(--darker);
+  box-shadow: 0 5px 12px var(--glow);
+}
+.small { font-size: 12px; opacity: 0.7; margin-top: 12px; }
+
+/* Contact page customization */
+#contact .btn-main { font-weight: 600; padding: 18px; font-size: 16px; }
+#contact .btn-main:first-of-type {
+  background: linear-gradient(135deg, var(--main), #FFB14C);
+}
+#contact .btn-main:last-of-type {
+  background: linear-gradient(135deg, #1877F2, #3b82f6);
+  color: #fff;
+  box-shadow: 0 6px 15px rgba(24, 119, 242, 0.3);
+}
 </style>
 </head>
 
@@ -138,12 +225,12 @@ box-shadow:0 6px 20px var(--glow);
 <div class="container">
 
     <div id="home" class="page active">
-        <div class="section center" style="border:none;box-shadow:none;background:transparent;">
+        <div class="section center" style="border:none;box-shadow:none;background:transparent; backdrop-filter: none; padding-bottom: 10px;">
             <div class="logo">
                 <img src="logo.jpg" alt="pinkjujapipi">
             </div>
             <h1>pinkjujapipi</h1>
-            <p style="color:var(--dark);opacity:.8;margin:10px 0 20px;">ร้านจูรับทำเว็บครบวงจรนะแม่น้า⭐️</p>
+            <p style="color:var(--dark);opacity:.9;margin:15px 0 25px; font-weight: 400;">ร้านจูรับทำเว็บครบวงจรนะแม่น้า⭐️</p>
             
             <div class="badges">
                 <div class="badge">💻 เว็บแอพพรีเมียม</div>
@@ -156,10 +243,10 @@ box-shadow:0 6px 20px var(--glow);
 
         <div class="section">
             <h2>📋 ขั้นตอนการสั่ง</h2>
-            <div class="step"><div class="step-num">1</div><div>กรอกฟอร์ม รายละเอียดร้านค้า</div></div>
-            <div class="step"><div class="step-num">2</div><div>ส่งลิงก์ตัวอย่างงาน/โลโก้</div></div>
-            <div class="step"><div class="step-num">3</div><div>ส่งงานให้เช็ค/ชำระเงิน</div></div>
-            <div class="step"><div class="step-num">4</div><div>รอรับลิงก์ได้เลยค่า</div></div>
+            <div class="step"><div class="step-num">1</div><div style="font-weight: 400;">กรอกฟอร์ม รายละเอียดร้านค้า</div></div>
+            <div class="step"><div class="step-num">2</div><div style="font-weight: 400;">ส่งลิงก์ตัวอย่างงาน/โลโก้</div></div>
+            <div class="step"><div class="step-num">3</div><div style="font-weight: 400;">ส่งงานให้เช็ค/ชำระเงิน</div></div>
+            <div class="step"><div class="step-num">4</div><div style="font-weight: 400;">รอรับลิงก์ได้เลยค่า</div></div>
         </div>
 
         <div class="section">
@@ -173,27 +260,29 @@ box-shadow:0 6px 20px var(--glow);
     <div id="products" class="page">
         <div class="section">
             <h2>⭐️ ตัวอย่างผลงาน</h2>
-            <p style="font-size:12px; color:var(--dark); margin-bottom:15px; opacity:0.8;">รวมผลงานพรีเมียมจากทางร้าน</p>
+            <p style="font-size:12px; color:var(--dark); margin-bottom:20px; opacity:0.8;">รวมผลงานพรีเมียมจากทางร้าน</p>
 
-            <a href="https://julie-vwb.github.io/pinkjulie-land/" class="btn btn-sub">Pinkjulie Land</a>
-            <a href="https://julie-vwb.github.io/mahatep-shop/" class="btn btn-sub">Mahatep Shop</a>
-            <a href="https://julie-vwb.github.io/cxllmestore-shop/" class="btn btn-sub">Cxllmestore Shop</a>
-            <a href="https://julie-vwb.github.io/cooper-shop/" class="btn btn-sub">Cooper Shop</a>
-            <a href="https://julie-vwb.github.io/babybear-design/" class="btn btn-sub">Babybear Design</a>
-            <a href="https://julie-vwb.github.io/tanewcutie-design/" class="btn btn-sub">Tanewcutie Design</a>
-            <a href="https://julie-vwb.github.io/meow-font/" class="btn btn-sub">Meow Font</a>
-            <a href="https://julie-vwb.github.io/waray-design/" class="btn btn-sub">Waray Design</a>
-            <a href="https://julie-vwb.github.io/luna-webstudio/" class="btn btn-sub">Luna Webstudio</a>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+                <a href="https://julie-vwb.github.io/pinkjulie-land/" class="btn btn-sub" style="margin-top: 0;">Pinkjulie Land</a>
+                <a href="https://julie-vwb.github.io/mahatep-shop/" class="btn btn-sub" style="margin-top: 0;">Mahatep Shop</a>
+                <a href="https://julie-vwb.github.io/cxllmestore-shop/" class="btn btn-sub" style="margin-top: 0;">Cxllmestore Shop</a>
+                <a href="https://julie-vwb.github.io/cooper-shop/" class="btn btn-sub" style="margin-top: 0;">Cooper Shop</a>
+                <a href="https://julie-vwb.github.io/babybear-design/" class="btn btn-sub" style="margin-top: 0;">Babybear Design</a>
+                <a href="https://julie-vwb.github.io/tanewcutie-design/" class="btn btn-sub" style="margin-top: 0;">Tanewcutie Design</a>
+                <a href="https://julie-vwb.github.io/meow-font/" class="btn btn-sub" style="margin-top: 0;">Meow Font</a>
+                <a href="https://julie-vwb.github.io/waray-design/" class="btn btn-sub" style="margin-top: 0;">Waray Design</a>
+                <a href="https://julie-vwb.github.io/luna-webstudio/" class="btn btn-sub" style="margin-top: 0;">Luna Webstudio</a>
+            </div>
         </div>
     </div>
 
     <div id="contact" class="page">
         <div class="section center">
             <h2>📱 ติดต่อสอบถาม</h2>
-            <p style="margin-bottom:20px;">สะดวกช่องทางไหน ทักจูมาได้เลยค่ะ</p>
+            <p style="margin-bottom:25px; opacity: 0.9;">สะดวกช่องทางไหน ทักจูมาได้เลยค่ะ</p>
             
-            <a href="https://line.me/ti/p/LfBtdhlrVa" class="btn btn-main" style="margin-bottom:10px;">LINE ID: @pinkjujapipi</a>
-            <a href="https://www.facebook.com/profile.php?id=61554192600355" class="btn btn-main" style="background:#1877F2;">Facebook Fanpage</a>
+            <a href="https://line.me/ti/p/LfBtdhlrVa" class="btn btn-main" style="margin-bottom:12px;">LINE ID: @pinkjujapipi</a>
+            <a href="https://www.facebook.com/profile.php?id=61554192600355" class="btn btn-main">Facebook Fanpage</a>
             
             <div class="footer">
                 <p class="small">ตอบแชทตามคิว 09:00 - 22:00 น.</p>
