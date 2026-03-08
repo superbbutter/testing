@@ -9,15 +9,13 @@
 
 <style>
 :root {
-  --bg: #FEFFF5; /* ครีมสดใสกว่าเดิม */
-  --main: #FBBF24; /* เหลืองสดกว่าทองเดิม */
-  --accent: #FF00A2; /* ชมพูนีออนสำหรับตัดและเน้น "pinkjujapipi" */
-  --dark: #78350F; /* น้ำตาลเข้มเดิม */
-  --darker: #451A03; /* น้ำตาลเข้มกว่าเดิม */
-  --white: rgba(255, 255, 255, 0.9); /* ขาวโปร่งแสงเล็กน้อย */
-  --glass: rgba(255, 255, 255, 0.3); /* เอฟเฟกต์แก้ว */
-  --glow: rgba(251, 191, 36, 0.15); /* แสงเหลืองนุ่มนวล */
-  --accent-glow: rgba(255, 0, 162, 0.15); /* แสงชมพูอ่อนๆ */
+  --bg: #FFFDF5; /* ครีมเนยละมุนๆ */
+  --main: #FBBF24; /* เหลือง */
+  --dark: #78350F; /* น้ำตาลช็อกโกแลต */
+  --darker: #451A03; /* น้ำตาลเข้ม */
+  --white: rgba(255, 255, 255, 0.95);
+  --glass: rgba(255, 255, 255, 0.5); /* เอฟเฟกต์แก้ว */
+  --glow: rgba(251, 191, 36, 0.25); /* แสงเหลืองนุ่มนวล */
   --transition: 0.3s ease;
 }
 
@@ -25,9 +23,9 @@
 
 body {
   background: var(--bg);
-  background-image: linear-gradient(135deg, #FEFFF5 0%, #FFFDF0 100%);
+  background-image: linear-gradient(135deg, #FFFDF5 0%, #FFF8D6 100%);
   display: flex; justify-content: center;
-  padding-bottom: 90px; /* กันโดนเมนูด้านล่างทับ เพิ่มเล็กน้อย */
+  padding-bottom: 90px;
 }
 
 .container {
@@ -51,12 +49,17 @@ body {
   border-radius: 25px;
   padding: 30px 25px;
   margin-bottom: 25px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(120, 53, 15, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 h1, h2, h3 { color: var(--dark); margin-bottom: 18px; font-weight: 600; }
-h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+h1 { 
+  font-size: 28px; 
+  background: linear-gradient(90deg, var(--darker), var(--dark)); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+}
 .center { text-align: center; }
 
 /* Navigation Bar */
@@ -64,13 +67,13 @@ h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--acce
   position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
   width: 90%; max-width: 450px;
   backdrop-filter: blur(15px);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
   display: flex; justify-content: space-around;
   padding: 15px;
   border-radius: 35px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 30px rgba(120, 53, 15, 0.1);
   z-index: 1000;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   transition: var(--transition);
 }
 
@@ -89,21 +92,48 @@ h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--acce
 .nav-item.active {
   background: var(--dark);
   color: #fff;
-  box-shadow: 0 5px 15px rgba(120, 53, 15, 0.3);
+  box-shadow: 0 5px 15px rgba(120, 53, 15, 0.2);
 }
 
-/* Logo */
+/* Logo & Floating Emojis */
+.logo-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 25px;
+}
+
 .logo {
-  width: 160px; height: 160px;
+  width: 100%; height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  margin: 0 auto 25px;
-  box-shadow: 0 10px 30px var(--accent-glow);
+  box-shadow: 0 10px 30px var(--glow);
   transition: var(--transition);
   border: 6px solid #fff;
+  position: relative;
+  z-index: 2;
 }
 .logo img { width: 100%; height: 100%; object-fit: cover; }
-.logo:hover { transform: scale(1.03) rotate(2deg); }
+.logo-wrapper:hover .logo { transform: scale(1.03) rotate(2deg); }
+
+/* การตั้งค่าอิโมจิลอย */
+.floating-emoji {
+  position: absolute;
+  font-size: 26px;
+  z-index: 5;
+  animation: floatEmoji 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.emoji-1 { top: -10px; left: -15px; animation-delay: 0s; font-size: 28px; } /* 🧸 */
+.emoji-2 { top: 20px; right: -25px; animation-delay: 0.7s; } /* 🧈 */
+.emoji-3 { bottom: 15px; left: -20px; animation-delay: 1.4s; } /* 🥞 */
+.emoji-4 { bottom: -5px; right: -15px; animation-delay: 2.1s; font-size: 30px; } /* ⭐️ */
+
+@keyframes floatEmoji {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(10deg); }
+}
 
 /* Badges */
 .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 25px; }
@@ -111,12 +141,12 @@ h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--acce
   background: #fff;
   padding: 10px 20px;
   border-radius: 30px;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 5px 12px rgba(120, 53, 15, 0.05);
   font-size: 13px;
   color: var(--dark);
   border: 2px solid var(--main);
 }
-.badge:first-child { border-color: var(--accent); color: var(--accent); }
+.badge:first-child { border-color: var(--dark); color: var(--dark); font-weight: 500;}
 
 /* Buttons */
 .btn {
@@ -129,27 +159,27 @@ h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--acce
 .btn:hover { transform: translateY(-3px); }
 
 .btn-main {
-  background: linear-gradient(135deg, var(--main), #FFB14C);
+  background: linear-gradient(135deg, var(--main), #FDE047);
   color: var(--darker);
-  box-shadow: 0 6px 15px rgba(251, 191, 36, 0.3);
+  box-shadow: 0 6px 15px rgba(251, 191, 36, 0.4);
 }
 .btn-outline {
   background: #fff;
-  border: 2px solid var(--accent);
-  color: var(--accent);
+  border: 2px dashed var(--dark);
+  color: var(--dark);
   margin-top: 25px;
-  box-shadow: 0 5px 12px var(--accent-glow);
+  box-shadow: 0 5px 12px rgba(120, 53, 15, 0.08);
 }
 .btn-sub {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--main);
   color: var(--dark);
   font-size: 14px;
 }
-.btn-sub:hover { background: #fff; }
+.btn-sub:hover { background: #fff; box-shadow: 0 4px 10px var(--glow); }
 
 /* Steps */
-.step { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.step { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; color: var(--dark); }
 .step-num {
   background: var(--main);
   color: var(--darker);
@@ -165,10 +195,11 @@ h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--acce
 .price-row {
   display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 12px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
   padding: 12px 20px;
   border-radius: 18px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 10px rgba(120, 53, 15, 0.03);
+  color: var(--dark);
 }
 .price-tag {
   background: var(--main);
@@ -187,29 +218,30 @@ h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--acce
   text-align: center;
   padding: 10px;
   border-radius: 25px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   color: var(--dark);
   font-size: 13px;
   transition: var(--transition);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(251, 191, 36, 0.5);
 }
 .socials a:hover {
   background: var(--main);
   color: var(--darker);
   box-shadow: 0 5px 12px var(--glow);
 }
-.small { font-size: 12px; opacity: 0.7; margin-top: 12px; }
+.small { font-size: 12px; opacity: 0.7; margin-top: 12px; color: var(--dark); }
 
 /* Contact page customization */
 #contact .btn-main { font-weight: 600; padding: 18px; font-size: 16px; }
 #contact .btn-main:first-of-type {
-  background: linear-gradient(135deg, var(--main), #FFB14C);
+  background: linear-gradient(135deg, var(--main), #FDE047);
 }
 #contact .btn-main:last-of-type {
-  background: linear-gradient(135deg, #1877F2, #3b82f6);
-  color: #fff;
-  box-shadow: 0 6px 15px rgba(24, 119, 242, 0.3);
+  background: #fff;
+  border: 2px solid #1877F2;
+  color: #1877F2;
+  box-shadow: 0 6px 15px rgba(24, 119, 242, 0.1);
 }
 </style>
 </head>
@@ -226,9 +258,17 @@ h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--acce
 
     <div id="home" class="page active">
         <div class="section center" style="border:none;box-shadow:none;background:transparent; backdrop-filter: none; padding-bottom: 10px;">
-            <div class="logo">
-                <img src="logo.jpg" alt="pinkjujapipi">
+            
+            <div class="logo-wrapper">
+                <div class="floating-emoji emoji-1">🧸</div>
+                <div class="floating-emoji emoji-2">🧈</div>
+                <div class="floating-emoji emoji-3">🥞</div>
+                <div class="floating-emoji emoji-4">⭐️</div>
+                <div class="logo">
+                    <img src="logo.jpg" alt="pinkjujapipi">
+                </div>
             </div>
+
             <h1>pinkjujapipi</h1>
             <p style="color:var(--dark);opacity:.9;margin:15px 0 25px; font-weight: 400;">ร้านจูรับทำเว็บครบวงจรนะแม่น้า⭐️</p>
             
@@ -279,7 +319,7 @@ h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--acce
     <div id="contact" class="page">
         <div class="section center">
             <h2>📱 ติดต่อสอบถาม</h2>
-            <p style="margin-bottom:25px; opacity: 0.9;">สะดวกช่องทางไหน ทักจูมาได้เลยค่ะ</p>
+            <p style="margin-bottom:25px; opacity: 0.9; color: var(--dark);">สะดวกช่องทางไหน ทักจูมาได้เลยค่ะ</p>
             
             <a href="https://line.me/ti/p/LfBtdhlrVa" class="btn btn-main" style="margin-bottom:12px;">LINE ID: @pinkjujapipi</a>
             <a href="https://www.facebook.com/profile.php?id=61554192600355" class="btn btn-main">Facebook Fanpage</a>
@@ -302,19 +342,15 @@ h1 { font-size: 28px; background: linear-gradient(90deg, var(--dark), var(--acce
 
 <script>
 function showPage(pageId, element) {
-    // 1. ซ่อนทุกหน้า
     const pages = document.querySelectorAll('.page');
     pages.forEach(page => page.classList.remove('active'));
 
-    // 2. แสดงหน้าที่เลือก
     document.getElementById(pageId).classList.add('active');
 
-    // 3. เปลี่ยนสีปุ่มเมนู
     const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach(item => item.classList.remove('active'));
     element.classList.add('active');
 
-    // 4. เลื่อนหน้าจอกลับไปด้านบน
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
